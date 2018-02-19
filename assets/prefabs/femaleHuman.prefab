@@ -1,0 +1,13 @@
+{
+  "skeletalmesh": {
+    "mesh": "femaleHuman",
+    "heightOffset": -2.8,
+    "material": "femalehumanSkin",
+    "animation": "femalehumanStand",
+    "animationPool": ["femalehumanStand"],
+    "loop": true,
+    "scale": [0.32, 0.32, 0.32]
+  },
+  "persisted": false,
+  "location": {}
+}
