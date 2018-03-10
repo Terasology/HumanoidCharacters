@@ -15,34 +15,50 @@
  */
 package org.terasology.characters.humanoid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.terasology.assets.management.AssetManager;
 import org.terasology.engine.modes.loadProcesses.AwaitedLocalCharacterSpawnEvent;
 import org.terasology.entitySystem.entity.EntityBuilder;
+import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
+import org.terasology.entitySystem.entity.lifecycleEvents.BeforeDeactivateComponent;
 import org.terasology.entitySystem.entity.lifecycleEvents.OnChangedComponent;
 import org.terasology.entitySystem.event.EventPriority;
 import org.terasology.entitySystem.event.ReceiveEvent;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
+import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
+import org.terasology.logic.characters.StandComponent;
 import org.terasology.logic.characters.VisualCharacterComponent;
+import org.terasology.logic.characters.WalkComponent;
 import org.terasology.logic.characters.events.CreateVisualCharacterEvent;
 import org.terasology.logic.console.commandSystem.annotations.Command;
 import org.terasology.logic.console.commandSystem.annotations.Sender;
+import org.terasology.logic.location.LocationComponent;
 import org.terasology.logic.players.LocalPlayer;
+import org.terasology.math.geom.Vector3f;
 import org.terasology.registry.In;
+import org.terasology.rendering.assets.animation.MeshAnimation;
 import org.terasology.rendering.assets.material.Material;
 import org.terasology.rendering.logic.SkeletalMeshComponent;
 import org.terasology.rendering.nui.Color;
 import org.terasology.rendering.nui.NUIManager;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Makes human character appear
  */
-@RegisterSystem(RegisterMode.ALWAYS)
-public class CharacterAppearanceSystem extends BaseComponentSystem {
+@RegisterSystem(RegisterMode.CLIENT)
+public class CharacterAppearanceClientSystem extends BaseComponentSystem implements UpdateSubscriberSystem {
+    private static final Logger logger = LoggerFactory.getLogger(CharacterAppearanceClientSystem.class);
 
     public static final String CONFIG_SCREEN = "CharacterAppearanceScreen";
+    private static final float MIN_SPEED_IN_M_PER_S_FOR_WALK_ANIMATION = 1.0f;
     @In
     private AssetManager assetManager;
 
@@ -52,9 +68,14 @@ public class CharacterAppearanceSystem extends BaseComponentSystem {
     @In
     private NUIManager nuiManager;
 
+    @In
+    private EntityManager entityManager;
+
+    private Map<EntityRef, Vector3f> entityToLastLocationMap = new HashMap<>();
 
 
-    @ReceiveEvent(priority = EventPriority.PRIORITY_NORMAL, netFilter =  RegisterMode.CLIENT)
+
+    @ReceiveEvent(priority = EventPriority.PRIORITY_NORMAL)
     public void onCreateDefaultVisualCharacter(CreateVisualCharacterEvent event, EntityRef characterEntity,
                                                CharacterAppearanceComponent characterAppearanceComponent) {
         EntityBuilder entityBuilder = event.getVisualCharacterBuilder();
@@ -80,7 +101,7 @@ public class CharacterAppearanceSystem extends BaseComponentSystem {
         event.consume();
     }
 
-    @ReceiveEvent(netFilter =  RegisterMode.CLIENT)
+    @ReceiveEvent
     public void onChangeHumanoidCharacter(OnChangedComponent event, EntityRef characterEntity,
                                                CharacterAppearanceComponent characterAppearanceComponent) {
         VisualCharacterComponent visualCharacterComponent = characterEntity.getComponent(VisualCharacterComponent.class);
@@ -111,31 +132,6 @@ public class CharacterAppearanceSystem extends BaseComponentSystem {
         visualCharacter.saveComponent(skeletalMeshComponent);
     }
 
-    @ReceiveEvent(netFilter =  RegisterMode.AUTHORITY)
-    public void onCreateDefaultVisualCharacter(ChangeCharacterAppearanceRequest event, EntityRef characterEntity,
-                                               CharacterAppearanceComponent characterAppearanceComponent) {
-        if (event.getSkinColor() != null) {
-            characterAppearanceComponent.skinColor = event.getSkinColor();
-        }
-        if (event.getEyeColor() != null) {
-            characterAppearanceComponent.eyeColor = event.getEyeColor();
-        }
-        if (event.getHairColor() != null) {
-            characterAppearanceComponent.hairColor = event.getHairColor();
-        }
-        if (event.getPantColor() != null) {
-            characterAppearanceComponent.pantColor = event.getPantColor();
-        }
-        if (event.getShirtColor() != null) {
-            characterAppearanceComponent.shirtColor = event.getShirtColor();
-        }
-        if (event.getShoeColor() != null) {
-            characterAppearanceComponent.shoeColor = event.getShoeColor();
-        }
-        characterEntity.saveComponent(characterAppearanceComponent);
-        characterEntity.removeComponent(ShowCharacterApperanceDialogComponent.class);
-    }
-
     static String colorToHex(Color skinColor) {
         return skinColor.toHex().substring(0,6);
     }
@@ -160,5 +156,67 @@ public class CharacterAppearanceSystem extends BaseComponentSystem {
         showConfigurationScreen();
     }
 
+    @Override
+    public void update(float delta) {
+        for (EntityRef characterEntity: entityManager.getEntitiesWith(CharacterAppearanceComponent.class)) {
+            updateVisualForCharacterEntity(characterEntity, delta);
+
+        }
+    }
+    @ReceiveEvent
+    public void onMinionDeactivation(BeforeDeactivateComponent event, EntityRef entity,
+                                     CharacterAppearanceComponent component) {
+        entityToLastLocationMap.remove(entity);
+    }
+
+    private void updateVisualForCharacterEntity(EntityRef characterEntity, float elapsedSeconds) {
+        LocationComponent locationComponent = characterEntity.getComponent(LocationComponent.class);
+        if (locationComponent == null) {
+            return;
+        }
+        VisualCharacterComponent visualCharacterComponent = characterEntity.getComponent(VisualCharacterComponent.class);
+        if (visualCharacterComponent == null) {
+            return;
+        }
+        EntityRef visualCharacter = visualCharacterComponent.visualCharacter;
+        if (visualCharacter == null || !visualCharacter.isActive()) {
+            return;
+        }
+
+        WalkComponent walkComponent = visualCharacter.getComponent(WalkComponent.class);
+        if (walkComponent == null) {
+            return;
+        }
+        StandComponent standComponent = visualCharacter.getComponent(StandComponent.class);
+        if (standComponent == null) {
+            return;
+        }
+        SkeletalMeshComponent skeletalMeshComponent = visualCharacter.getComponent(SkeletalMeshComponent.class);
+        if (skeletalMeshComponent == null)  {
+            return;
+        }
+        Vector3f position = locationComponent.getWorldPosition();
+        Vector3f lastPosition = entityToLastLocationMap.get(characterEntity);
+        entityToLastLocationMap.put(characterEntity, position);
+
+        List<MeshAnimation> wantedAnimationPool;
+        float speedInMPerS = lastPosition != null ? position.distance(lastPosition) / elapsedSeconds : 0f;
+        logger.info("Speed: " + speedInMPerS);
+
+        if (lastPosition == null || speedInMPerS < MIN_SPEED_IN_M_PER_S_FOR_WALK_ANIMATION) {
+            wantedAnimationPool = standComponent.animationPool;
+        } else {
+            wantedAnimationPool = walkComponent.animationPool;
+        }
+
+        if (wantedAnimationPool.equals(skeletalMeshComponent.animationPool)) {
+            return;
+        }
+        skeletalMeshComponent.animation = null;
+        skeletalMeshComponent.animationPool.clear();
+        skeletalMeshComponent.animationPool.addAll(wantedAnimationPool);
+        skeletalMeshComponent.loop = true;
+        visualCharacter.saveComponent(skeletalMeshComponent);
+    }
 
 }
