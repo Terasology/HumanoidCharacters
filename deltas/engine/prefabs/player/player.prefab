@@ -6,5 +6,6 @@
         "shirtColor": [231, 101, 92, 255],
         "pantColor": [97, 135, 211, 255],
         "shoeColor": [240, 71, 47, 255]
-    }
+    },
+    "ShowApperanceConfigDialog":{}
 }

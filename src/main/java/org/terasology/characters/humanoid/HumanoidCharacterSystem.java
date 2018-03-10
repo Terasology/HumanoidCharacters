@@ -16,6 +16,7 @@
 package org.terasology.characters.humanoid;
 
 import org.terasology.assets.management.AssetManager;
+import org.terasology.engine.modes.loadProcesses.AwaitedLocalCharacterSpawnEvent;
 import org.terasology.entitySystem.entity.EntityBuilder;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.entity.lifecycleEvents.OnChangedComponent;
@@ -28,6 +29,7 @@ import org.terasology.logic.characters.VisualCharacterComponent;
 import org.terasology.logic.characters.events.CreateVisualCharacterEvent;
 import org.terasology.logic.console.commandSystem.annotations.Command;
 import org.terasology.logic.console.commandSystem.annotations.Sender;
+import org.terasology.logic.players.LocalPlayer;
 import org.terasology.registry.In;
 import org.terasology.rendering.assets.material.Material;
 import org.terasology.rendering.logic.SkeletalMeshComponent;
@@ -40,9 +42,12 @@ import org.terasology.rendering.nui.NUIManager;
 @RegisterSystem(RegisterMode.ALWAYS)
 public class HumanoidCharacterSystem extends BaseComponentSystem {
 
+    public static final String CONFIG_SCREEN = "ConfigureHumanoidCharacterScreen";
     @In
     private AssetManager assetManager;
 
+    @In
+    private LocalPlayer localPlayer;
 
     @In
     private NUIManager nuiManager;
@@ -76,7 +81,7 @@ public class HumanoidCharacterSystem extends BaseComponentSystem {
     }
 
     @ReceiveEvent(netFilter =  RegisterMode.CLIENT)
-    public void onCreateDefaultVisualCharacter(OnChangedComponent event, EntityRef characterEntity,
+    public void onChangeHumanoidCharacter(OnChangedComponent event, EntityRef characterEntity,
                                                HumanoidCharacterComponent humanoidCharacterComponent) {
         VisualCharacterComponent visualCharacterComponent = characterEntity.getComponent(VisualCharacterComponent.class);
         if (visualCharacterComponent == null) {
@@ -128,6 +133,7 @@ public class HumanoidCharacterSystem extends BaseComponentSystem {
             humanoidCharacterComponent.shoeColor = event.getShoeColor();
         }
         characterEntity.saveComponent(humanoidCharacterComponent);
+        characterEntity.removeComponent(ShowApperanceConfigDialogComponent.class);
     }
 
     static String colorToHex(Color skinColor) {
@@ -139,7 +145,20 @@ public class HumanoidCharacterSystem extends BaseComponentSystem {
             helpText = "Shows the screen for configuring the visual character appearance",
             runOnServer = false)
     public String configureCharacterAppearance(@Sender EntityRef sender) {
-        nuiManager.pushScreen("ConfigureHumanoidCharacterScreen");
+        showConfigurationScreen();
         return "";
     }
+
+    void showConfigurationScreen() {
+        nuiManager.pushScreen(CONFIG_SCREEN);
+    }
+
+    @ReceiveEvent(netFilter =  RegisterMode.CLIENT)
+    public void onShowCharacterApperanceConfigurationScreenEvent(AwaitedLocalCharacterSpawnEvent event,
+                                                                 EntityRef character,
+                                                                 ShowApperanceConfigDialogComponent component) {
+        showConfigurationScreen();
+    }
+
+
 }
