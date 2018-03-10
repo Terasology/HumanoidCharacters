@@ -45,9 +45,9 @@ import java.util.function.Supplier;
  * are sent to the server using various events to alter the region entity on the server's side. The color display of the region
  * utilizes a slider and box to generate the color, the rest are very simplistic widgets(number or text entries or checkboxes)
  */
-public class ConfigureHumanoidCharacterScreen extends CoreScreenLayer {
+public class CharacterAppearanceScreen extends CoreScreenLayer {
 
-    private static final Logger logger = LoggerFactory.getLogger(ConfigureHumanoidCharacterScreen.class);
+    private static final Logger logger = LoggerFactory.getLogger(CharacterAppearanceScreen.class);
 
     @In
     EntityManager entityManager;
@@ -93,7 +93,7 @@ public class ConfigureHumanoidCharacterScreen extends CoreScreenLayer {
 
     @Override
     public void onOpened() {
-        HumanoidCharacterComponent component = localPlayer.getCharacterEntity().getComponent(HumanoidCharacterComponent.class);
+        CharacterAppearanceComponent component = localPlayer.getCharacterEntity().getComponent(CharacterAppearanceComponent.class);
         this.skinColorSupplier = initSliderForColorTypeAndReturnGetterForColor("skin", component.skinColor, SKIN_COLORS);
         this.eyeColorSupplier = initSliderForColorTypeAndReturnGetterForColor("eye", component.eyeColor, EYE_COLORS);
         this.hairColorSupplier = initSliderForColorTypeAndReturnGetterForColor("hair", component.hairColor,HAIR_COLORS);
@@ -130,7 +130,7 @@ public class ConfigureHumanoidCharacterScreen extends CoreScreenLayer {
         Color shirtColor = shirtColorSupplier.get();
         Color pantColor = pantColorSupplier.get();
         Color shoeColor = shoeColorSupplier.get();;
-        localPlayer.getCharacterEntity().send(new SetHumanoidCharacterColorsRequest(skinColor, eyeColor, hairColor, shirtColor, pantColor, shoeColor));
+        localPlayer.getCharacterEntity().send(new ChangeCharacterAppearanceRequest(skinColor, eyeColor, hairColor, shirtColor, pantColor, shoeColor));
 
         getManager().popScreen();
     }

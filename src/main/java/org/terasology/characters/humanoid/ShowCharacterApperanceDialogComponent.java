@@ -23,5 +23,5 @@ import org.terasology.network.Replicate;
  * When this component is attached to a character a apperance selection dialg will be shown when the player joins.
  */
 @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
-public class ShowApperanceConfigDialogComponent implements Component {
+public class ShowCharacterApperanceDialogComponent implements Component {
 }

@@ -23,12 +23,12 @@ import static org.junit.Assert.assertEquals;
 /**
  *
  */
-public class HumanoidCharacterSystemTest {
+public class CharacterAppearanceSystemTest {
 
     @Test
     public void testColorToHex() {
-        assertEquals("FF0000", HumanoidCharacterSystem.colorToHex(new Color(1.0f, 0.0f, 0.0f)));
-        assertEquals("00FF00", HumanoidCharacterSystem.colorToHex(new Color(0.0f, 1.0f, 0.0f)));
-        assertEquals("0000FF", HumanoidCharacterSystem.colorToHex(new Color(0.0f, 0.0f, 1.0f)));
+        assertEquals("FF0000", CharacterAppearanceSystem.colorToHex(new Color(1.0f, 0.0f, 0.0f)));
+        assertEquals("00FF00", CharacterAppearanceSystem.colorToHex(new Color(0.0f, 1.0f, 0.0f)));
+        assertEquals("0000FF", CharacterAppearanceSystem.colorToHex(new Color(0.0f, 0.0f, 1.0f)));
     }
 }

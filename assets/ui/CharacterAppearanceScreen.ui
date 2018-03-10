@@ -1,5 +1,5 @@
 {
-  "type": "ConfigureHumanoidCharacterScreen",
+  "type": "CharacterAppearanceScreen",
   "contents": {
     "type": "RelativeLayout",
     "contents": [

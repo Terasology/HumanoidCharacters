@@ -24,7 +24,7 @@ import org.terasology.rendering.nui.Color;
  * Humanoid character properties
  */
 @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
-public class HumanoidCharacterComponent implements Component{
+public class CharacterAppearanceComponent implements Component{
 
     @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
     public Color skinColor;

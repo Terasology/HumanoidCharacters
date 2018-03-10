@@ -40,9 +40,9 @@ import org.terasology.rendering.nui.NUIManager;
  * Makes human character appear
  */
 @RegisterSystem(RegisterMode.ALWAYS)
-public class HumanoidCharacterSystem extends BaseComponentSystem {
+public class CharacterAppearanceSystem extends BaseComponentSystem {
 
-    public static final String CONFIG_SCREEN = "ConfigureHumanoidCharacterScreen";
+    public static final String CONFIG_SCREEN = "CharacterAppearanceScreen";
     @In
     private AssetManager assetManager;
 
@@ -56,23 +56,23 @@ public class HumanoidCharacterSystem extends BaseComponentSystem {
 
     @ReceiveEvent(priority = EventPriority.PRIORITY_NORMAL, netFilter =  RegisterMode.CLIENT)
     public void onCreateDefaultVisualCharacter(CreateVisualCharacterEvent event, EntityRef characterEntity,
-                                               HumanoidCharacterComponent humanoidCharacterComponent) {
+                                               CharacterAppearanceComponent characterAppearanceComponent) {
         EntityBuilder entityBuilder = event.getVisualCharacterBuilder();
         entityBuilder.addPrefab("HumanoidCharacters:femaleHuman");
         SkeletalMeshComponent skeletalMeshComponent = entityBuilder.getComponent(SkeletalMeshComponent.class);
         StringBuilder urnBuilder = new StringBuilder();
         urnBuilder.append("HumanoidCharacters:verticalColorArray(");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.skinColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.skinColor));
         urnBuilder.append(";");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.eyeColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.eyeColor));
         urnBuilder.append(";");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.hairColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.hairColor));
         urnBuilder.append(";");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.shirtColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.shirtColor));
         urnBuilder.append(";");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.pantColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.pantColor));
         urnBuilder.append(";");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.shoeColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.shoeColor));
         urnBuilder.append(")");
 
         skeletalMeshComponent.material = assetManager.getAsset(urnBuilder.toString(), Material.class).get();
@@ -82,7 +82,7 @@ public class HumanoidCharacterSystem extends BaseComponentSystem {
 
     @ReceiveEvent(netFilter =  RegisterMode.CLIENT)
     public void onChangeHumanoidCharacter(OnChangedComponent event, EntityRef characterEntity,
-                                               HumanoidCharacterComponent humanoidCharacterComponent) {
+                                               CharacterAppearanceComponent characterAppearanceComponent) {
         VisualCharacterComponent visualCharacterComponent = characterEntity.getComponent(VisualCharacterComponent.class);
         if (visualCharacterComponent == null) {
             return;
@@ -94,17 +94,17 @@ public class HumanoidCharacterSystem extends BaseComponentSystem {
         }
         StringBuilder urnBuilder = new StringBuilder();
         urnBuilder.append("HumanoidCharacters:verticalColorArray(");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.skinColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.skinColor));
         urnBuilder.append(";");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.eyeColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.eyeColor));
         urnBuilder.append(";");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.hairColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.hairColor));
         urnBuilder.append(";");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.shirtColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.shirtColor));
         urnBuilder.append(";");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.pantColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.pantColor));
         urnBuilder.append(";");
-        urnBuilder.append(colorToHex(humanoidCharacterComponent.shoeColor));
+        urnBuilder.append(colorToHex(characterAppearanceComponent.shoeColor));
         urnBuilder.append(")");
 
         skeletalMeshComponent.material = assetManager.getAsset(urnBuilder.toString(), Material.class).get();
@@ -112,28 +112,28 @@ public class HumanoidCharacterSystem extends BaseComponentSystem {
     }
 
     @ReceiveEvent(netFilter =  RegisterMode.AUTHORITY)
-    public void onCreateDefaultVisualCharacter(SetHumanoidCharacterColorsRequest event, EntityRef characterEntity,
-                                               HumanoidCharacterComponent humanoidCharacterComponent) {
+    public void onCreateDefaultVisualCharacter(ChangeCharacterAppearanceRequest event, EntityRef characterEntity,
+                                               CharacterAppearanceComponent characterAppearanceComponent) {
         if (event.getSkinColor() != null) {
-            humanoidCharacterComponent.skinColor = event.getSkinColor();
+            characterAppearanceComponent.skinColor = event.getSkinColor();
         }
         if (event.getEyeColor() != null) {
-            humanoidCharacterComponent.eyeColor = event.getEyeColor();
+            characterAppearanceComponent.eyeColor = event.getEyeColor();
         }
         if (event.getHairColor() != null) {
-            humanoidCharacterComponent.hairColor = event.getHairColor();
+            characterAppearanceComponent.hairColor = event.getHairColor();
         }
         if (event.getPantColor() != null) {
-            humanoidCharacterComponent.pantColor = event.getPantColor();
+            characterAppearanceComponent.pantColor = event.getPantColor();
         }
         if (event.getShirtColor() != null) {
-            humanoidCharacterComponent.shirtColor = event.getShirtColor();
+            characterAppearanceComponent.shirtColor = event.getShirtColor();
         }
         if (event.getShoeColor() != null) {
-            humanoidCharacterComponent.shoeColor = event.getShoeColor();
+            characterAppearanceComponent.shoeColor = event.getShoeColor();
         }
-        characterEntity.saveComponent(humanoidCharacterComponent);
-        characterEntity.removeComponent(ShowApperanceConfigDialogComponent.class);
+        characterEntity.saveComponent(characterAppearanceComponent);
+        characterEntity.removeComponent(ShowCharacterApperanceDialogComponent.class);
     }
 
     static String colorToHex(Color skinColor) {
@@ -156,7 +156,7 @@ public class HumanoidCharacterSystem extends BaseComponentSystem {
     @ReceiveEvent(netFilter =  RegisterMode.CLIENT)
     public void onShowCharacterApperanceConfigurationScreenEvent(AwaitedLocalCharacterSpawnEvent event,
                                                                  EntityRef character,
-                                                                 ShowApperanceConfigDialogComponent component) {
+                                                                 ShowCharacterApperanceDialogComponent component) {
         showConfigurationScreen();
     }
 

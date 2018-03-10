@@ -23,7 +23,7 @@ import org.terasology.rendering.nui.Color;
  * Send to character at server when the owner selected colors for it.
  */
 @ServerEvent
-public class SetHumanoidCharacterColorsRequest extends NetworkEvent {
+public class ChangeCharacterAppearanceRequest extends NetworkEvent {
     private Color skinColor;
     private Color eyeColor;
     private Color hairColor;
@@ -31,10 +31,10 @@ public class SetHumanoidCharacterColorsRequest extends NetworkEvent {
     private Color pantColor;
     private Color shoeColor;
 
-    protected SetHumanoidCharacterColorsRequest() {
+    protected ChangeCharacterAppearanceRequest() {
     }
 
-    public SetHumanoidCharacterColorsRequest(Color skinColor, Color eyeColor, Color hairColor, Color shirtColor, Color pantColor, Color shoeColor) {
+    public ChangeCharacterAppearanceRequest(Color skinColor, Color eyeColor, Color hairColor, Color shirtColor, Color pantColor, Color shoeColor) {
         this.skinColor = skinColor;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
