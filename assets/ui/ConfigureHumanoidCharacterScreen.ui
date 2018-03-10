@@ -1,0 +1,252 @@
+{
+  "type": "ConfigureHumanoidCharacterScreen",
+  "contents": {
+    "type": "RelativeLayout",
+    "contents": [
+      {
+        "type": "engine:UIBox",
+        "layoutInfo": {
+          "width": 500,
+          "height": 320,
+          "position-vertical-center": {},
+          "position-horizontal-center": {}
+        },
+        "content": {
+          "type": "RelativeLayout",
+          "contents": [
+            {
+              "type": "engine:UILabel",
+              "id": "titleLabel",
+              "layoutInfo": {
+                "position-top": {},
+                "position-horizontal-center": {},
+                "use-content-height": true
+              },
+              "text": "Configure character appearance"
+            },
+            {
+              "type": "RowLayout",
+              "id": "skinColorLayout",
+              "layoutInfo": {
+                "position-top": {
+                  "widget": "titleLabel",
+                  "target": "BOTTOM",
+                  "offset": 5
+                },
+                "use-content-height": true
+              },
+              "contents": [
+                {
+                  "type": "engine:UILabel",
+                  "id": "skinColorLabel",
+                  "layoutInfo": {},
+                  "text": "Skin Color"
+                },
+                {
+                  "type": "engine:UISlider",
+                  "id": "skinColorSlider",
+                  "layoutInfo": {}
+                },
+                {
+                  "type": "engine:UIImage",
+                  "id": "skinColorImage",
+                  "layoutInfo": {
+                    "relativeWidth": 0.1
+                  },
+                  "skin": "framed_image"
+                }
+              ]
+            },
+            {
+              "type": "RowLayout",
+              "id": "eyeColorLayout",
+              "layoutInfo": {
+                "position-top": {
+                  "widget": "skinColorLayout",
+                  "target": "BOTTOM",
+                  "offset": 5
+                },
+                "use-content-height": true
+              },
+              "contents": [
+                {
+                  "type": "engine:UILabel",
+                  "id": "eyeColorLabel",
+                  "layoutInfo": {},
+                  "text": "Eye Color"
+                },
+                {
+                  "type": "engine:UISlider",
+                  "id": "eyeColorSlider",
+                  "layoutInfo": {}
+                },
+                {
+                  "type": "engine:UIImage",
+                  "id": "eyeColorImage",
+                  "layoutInfo": {
+                    "relativeWidth": 0.1
+                  },
+                  "skin": "framed_image"
+                }
+              ]
+            },
+            {
+              "type": "RowLayout",
+              "id": "hairColorLayout",
+              "layoutInfo": {
+                "position-top": {
+                  "widget": "eyeColorLayout",
+                  "target": "BOTTOM",
+                  "offset": 5
+                },
+                "use-content-height": true
+              },
+              "contents": [
+                {
+                  "type": "engine:UILabel",
+                  "id": "hairColorLabel",
+                  "layoutInfo": {},
+                  "text": "Hair Color"
+                },
+                {
+                  "type": "engine:UISlider",
+                  "id": "hairColorSlider",
+                  "layoutInfo": {}
+                },
+                {
+                  "type": "engine:UIImage",
+                  "id": "hairColorImage",
+                  "layoutInfo": {
+                    "relativeWidth": 0.1
+                  },
+                  "skin": "framed_image"
+                }
+              ]
+            },
+            {
+              "type": "RowLayout",
+              "id": "shirtColorLayout",
+              "layoutInfo": {
+                "position-top": {
+                  "widget": "hairColorLayout",
+                  "target": "BOTTOM",
+                  "offset": 5
+                },
+                "use-content-height": true
+              },
+              "contents": [
+                {
+                  "type": "engine:UILabel",
+                  "id": "shirtColorLabel",
+                  "layoutInfo": {},
+                  "text": "Shirt Color"
+                },
+                {
+                  "type": "engine:UISlider",
+                  "id": "shirtColorSlider",
+                  "layoutInfo": {}
+                },
+                {
+                  "type": "engine:UIImage",
+                  "id": "shirtColorImage",
+                  "layoutInfo": {
+                    "relativeWidth": 0.1
+                  },
+                  "skin": "framed_image"
+                }
+              ]
+            },
+            {
+              "type": "RowLayout",
+              "id": "pantColorLayout",
+              "layoutInfo": {
+                "position-top": {
+                  "widget": "shirtColorLayout",
+                  "target": "BOTTOM",
+                  "offset": 5
+                },
+                "use-content-height": true
+              },
+              "contents": [
+                {
+                  "type": "engine:UILabel",
+                  "id": "pantColorLabel",
+                  "layoutInfo": {},
+                  "text": "Pant Color"
+                },
+                {
+                  "type": "engine:UISlider",
+                  "id": "pantColorSlider",
+                  "layoutInfo": {}
+                },
+                {
+                  "type": "engine:UIImage",
+                  "id": "pantColorImage",
+                  "layoutInfo": {
+                    "relativeWidth": 0.1
+                  },
+                  "skin": "framed_image"
+                }
+              ]
+            },
+            {
+              "type": "RowLayout",
+              "id": "shoeColorLayout",
+              "layoutInfo": {
+                "position-top": {
+                  "widget": "pantColorLayout",
+                  "target": "BOTTOM",
+                  "offset": 5
+                },
+                "use-content-height": true
+              },
+              "contents": [
+                {
+                  "type": "engine:UILabel",
+                  "id": "shoeColorLabel",
+                  "layoutInfo": {},
+                  "text": "Shoe Color"
+                },
+                {
+                  "type": "engine:UISlider",
+                  "id": "shoeColorSlider",
+                  "layoutInfo": {}
+                },
+                {
+                  "type": "engine:UIImage",
+                  "id": "shoeColorImage",
+                  "layoutInfo": {
+                    "relativeWidth": 0.1
+                  },
+                  "skin": "framed_image"
+                }
+              ]
+            },
+            {
+              "type": "engine:RowLayout",
+              "id": "buttonLayout",
+              "layoutInfo": {
+                "height": 50,
+                "position-bottom": {}
+              },
+              "contents": [
+                {
+                  "type": "engine:UIButton",
+                  "id": "okButton",
+                  "layoutInfo": {},
+                  "text": "Ok"
+                },
+                {
+                  "type": "engine:UIButton",
+                  "id": "cancelButton",
+                  "layoutInfo": {},
+                  "text": "Cancel"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

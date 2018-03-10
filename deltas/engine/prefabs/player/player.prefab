@@ -1,0 +1,10 @@
+{
+    "HumanoidCharacter": {
+        "skinColor": [231, 189, 145, 255],
+        "eyeColor": [41, 41, 41, 255],
+        "hairColor": [209, 194, 112, 255],
+        "shirtColor": [231, 101, 92, 255],
+        "pantColor": [97, 135, 211, 255],
+        "shoeColor": [240, 71, 47, 255]
+    }
+}
