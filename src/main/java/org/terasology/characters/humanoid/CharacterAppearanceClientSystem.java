@@ -55,7 +55,6 @@ import java.util.Map;
  */
 @RegisterSystem(RegisterMode.CLIENT)
 public class CharacterAppearanceClientSystem extends BaseComponentSystem implements UpdateSubscriberSystem {
-    private static final Logger logger = LoggerFactory.getLogger(CharacterAppearanceClientSystem.class);
 
     public static final String CONFIG_SCREEN = "CharacterAppearanceScreen";
     private static final float MIN_SPEED_IN_M_PER_S_FOR_WALK_ANIMATION = 1.0f;
@@ -201,7 +200,6 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
 
         List<MeshAnimation> wantedAnimationPool;
         float speedInMPerS = lastPosition != null ? position.distance(lastPosition) / elapsedSeconds : 0f;
-        logger.info("Speed: " + speedInMPerS);
 
         if (lastPosition == null || speedInMPerS < MIN_SPEED_IN_M_PER_S_FOR_WALK_ANIMATION) {
             wantedAnimationPool = standComponent.animationPool;
