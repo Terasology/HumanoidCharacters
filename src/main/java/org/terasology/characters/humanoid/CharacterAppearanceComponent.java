@@ -23,19 +23,19 @@ import org.terasology.rendering.nui.Color;
 /**
  * Humanoid character properties
  */
-@Replicate(FieldReplicateType.SERVER_TO_CLIENT)
+@Replicate(FieldReplicateType.OWNER_TO_SERVER_TO_CLIENT)
 public class CharacterAppearanceComponent implements Component{
 
-    @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
+    @Replicate(FieldReplicateType.OWNER_TO_SERVER_TO_CLIENT)
     public Color skinColor;
-    @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
+    @Replicate(FieldReplicateType.OWNER_TO_SERVER_TO_CLIENT)
     public Color eyeColor;
-    @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
+    @Replicate(FieldReplicateType.OWNER_TO_SERVER_TO_CLIENT)
     public Color hairColor;
-    @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
+    @Replicate(FieldReplicateType.OWNER_TO_SERVER_TO_CLIENT)
     public Color shirtColor;
-    @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
+    @Replicate(FieldReplicateType.OWNER_TO_SERVER_TO_CLIENT)
     public Color pantColor;
-    @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
+    @Replicate(FieldReplicateType.OWNER_TO_SERVER_TO_CLIENT)
     public Color shoeColor;
 }
