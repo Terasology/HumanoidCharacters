@@ -1,0 +1,10 @@
+{
+    "shader": "engine:GenericMeshMaterial",
+    "params":{
+        "diffuse": "HumanoidCharacters:NakedLightSkin",
+        "colorOffset": [
+            1.0, 1.0, 1.0
+        ],
+        "textured": true
+    }
+}

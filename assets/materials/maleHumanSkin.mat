@@ -1,0 +1,12 @@
+{
+    "shader": "engine:GenericMeshMaterial",
+    "params": {
+        "diffuse": "HumanoidCharacters:ClothedDarkSkin",
+        "colorOffset": [
+        1.0,
+        1.0,
+        1.0
+        ],
+        "textured": true
+    }
+}

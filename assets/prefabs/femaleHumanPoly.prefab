@@ -1,0 +1,19 @@
+{
+    "skeletalmesh": {
+        "mesh": "femaleHumanPoly",
+        "heightOffset": -0.8,
+        "material": "HumanoidCharacters:femaleHumanSkin",
+        "animation": "femalehumanpoly#idle",
+        "animationPool": ["femalehumanpoly#idle"],
+        "loop": true,
+        "scale": [0.005, 0.005, 0.005]
+    },
+    "persisted": false,
+    "location": {},
+    "Stand" :{
+        "animationPool": ["femalehumanpoly#idle"]
+    },
+    "Walk" :{
+        "animationPool": ["femalehumanpoly#Running"]
+    }
+}

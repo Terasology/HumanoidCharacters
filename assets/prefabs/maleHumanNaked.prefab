@@ -1,0 +1,19 @@
+{
+    "skeletalmesh": {
+        "mesh": "maleHumanNaked",
+        "heightOffset": -0.8,
+        "material": "HumanoidCharacters:maleHumanNakedSkin",
+        "animation": "maleHumanNaked#idle",
+        "animationPool": ["maleHumanNaked#idle"],
+        "loop": true,
+        "scale": [0.5, 0.5, 0.5]
+    },
+    "persisted": false,
+    "location": {},
+    "Stand" :{
+        "animationPool": ["maleHumanNaked#idle"]
+    },
+    "Walk" :{
+        "animationPool": ["maleHumanNaked#Walk"]
+    }
+}
