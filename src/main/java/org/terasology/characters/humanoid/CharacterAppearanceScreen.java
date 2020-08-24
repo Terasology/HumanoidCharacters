@@ -1,18 +1,5 @@
-/*
- * Copyright 2017 MovingBlocks
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2020 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
 package org.terasology.characters.humanoid;
 
 import com.google.common.base.Function;
@@ -23,16 +10,16 @@ import org.slf4j.LoggerFactory;
 import org.terasology.assets.ResourceUrn;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.logic.players.LocalPlayer;
+import org.terasology.nui.Color;
+import org.terasology.nui.UIWidget;
+import org.terasology.nui.WidgetUtil;
+import org.terasology.nui.databinding.DefaultBinding;
+import org.terasology.nui.widgets.UIImage;
+import org.terasology.nui.widgets.UISlider;
 import org.terasology.registry.In;
 import org.terasology.rendering.assets.texture.Texture;
 import org.terasology.rendering.assets.texture.TextureUtil;
-import org.terasology.rendering.nui.Color;
 import org.terasology.rendering.nui.CoreScreenLayer;
-import org.terasology.rendering.nui.UIWidget;
-import org.terasology.rendering.nui.WidgetUtil;
-import org.terasology.rendering.nui.databinding.DefaultBinding;
-import org.terasology.rendering.nui.widgets.UIImage;
-import org.terasology.rendering.nui.widgets.UISlider;
 import org.terasology.utilities.Assets;
 
 import java.math.RoundingMode;
@@ -126,10 +113,10 @@ public class CharacterAppearanceScreen extends CoreScreenLayer {
     public void onOkButton(UIWidget button) {
         Color skinColor = skinColorSupplier.get();
         Color eyeColor = eyeColorSupplier.get();
-        Color hairColor = hairColorSupplier.get();;
+        Color hairColor = hairColorSupplier.get();
         Color shirtColor = shirtColorSupplier.get();
         Color pantColor = pantColorSupplier.get();
-        Color shoeColor = shoeColorSupplier.get();;
+        Color shoeColor = shoeColorSupplier.get();
         localPlayer.getCharacterEntity().send(new ChangeCharacterAppearanceRequest(skinColor, eyeColor, hairColor, shirtColor, pantColor, shoeColor));
 
         getManager().popScreen();
