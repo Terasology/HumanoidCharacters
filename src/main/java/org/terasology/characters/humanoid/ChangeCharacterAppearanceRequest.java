@@ -17,7 +17,7 @@ package org.terasology.characters.humanoid;
 
 import org.terasology.network.NetworkEvent;
 import org.terasology.network.ServerEvent;
-import org.terasology.rendering.nui.Color;
+import org.terasology.nui.Color;
 
 /**
  * Send to character at server when the owner selected colors for it.

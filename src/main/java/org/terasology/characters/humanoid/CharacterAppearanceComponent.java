@@ -18,7 +18,7 @@ package org.terasology.characters.humanoid;
 import org.terasology.entitySystem.Component;
 import org.terasology.network.FieldReplicateType;
 import org.terasology.network.Replicate;
-import org.terasology.rendering.nui.Color;
+import org.terasology.nui.Color;
 
 /**
  * Humanoid character properties

@@ -23,16 +23,16 @@ import org.slf4j.LoggerFactory;
 import org.terasology.assets.ResourceUrn;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.logic.players.LocalPlayer;
+import org.terasology.nui.UIWidget;
+import org.terasology.nui.WidgetUtil;
+import org.terasology.nui.databinding.DefaultBinding;
+import org.terasology.nui.widgets.UIImage;
 import org.terasology.registry.In;
 import org.terasology.rendering.assets.texture.Texture;
 import org.terasology.rendering.assets.texture.TextureUtil;
-import org.terasology.rendering.nui.Color;
+import org.terasology.nui.Color;
 import org.terasology.rendering.nui.CoreScreenLayer;
-import org.terasology.rendering.nui.UIWidget;
-import org.terasology.rendering.nui.WidgetUtil;
-import org.terasology.rendering.nui.databinding.DefaultBinding;
-import org.terasology.rendering.nui.widgets.UIImage;
-import org.terasology.rendering.nui.widgets.UISlider;
+import org.terasology.nui.widgets.UISlider;
 import org.terasology.utilities.Assets;
 
 import java.math.RoundingMode;
@@ -63,26 +63,26 @@ public class CharacterAppearanceScreen extends CoreScreenLayer {
     private LocalPlayer localPlayer;
 
     private static final List<Color> SKIN_COLORS = Arrays.asList(
-            new Color(0xffd19fff),
-            new Color(0xe7bd91ff),
-            new Color(0x9c7248ff));
+        new Color(0xffd19fff),
+        new Color(0xe7bd91ff),
+        new Color(0x9c7248ff));
     private static final List<Color> EYE_COLORS = Arrays.asList(
-            new Color(0x292929ff));
+        new Color(0x292929ff));
     private static final List<Color> HAIR_COLORS = Arrays.asList(
-            new Color(0xd1c270ff),
-            new Color(0x292929ff),
-            new Color(0x7c5823ff));
-    private static final List<Color> SHIRT_COLORS =  Arrays.asList(
-            new Color(0xe7655cff),
-            new Color(0x64d769ff),
-            new Color(0x1560bdff),
-            new Color(0x73a7c4ff));
+        new Color(0xd1c270ff),
+        new Color(0x292929ff),
+        new Color(0x7c5823ff));
+    private static final List<Color> SHIRT_COLORS = Arrays.asList(
+        new Color(0xe7655cff),
+        new Color(0x64d769ff),
+        new Color(0x1560bdff),
+        new Color(0x73a7c4ff));
     private static final List<Color> PANT_COLORS = Arrays.asList(
-            new Color(0x6187d3ff),
-            new Color(0xc89459ff),
-            new Color(0x1560bdff));
+        new Color(0x6187d3ff),
+        new Color(0xc89459ff),
+        new Color(0x1560bdff));
     private static final List<Color> SHOE_COLORS = Arrays.asList(
-            new Color(0xf0472fff));
+        new Color(0xf0472fff));
 
     @Override
     public void initialise() {
@@ -96,8 +96,8 @@ public class CharacterAppearanceScreen extends CoreScreenLayer {
         CharacterAppearanceComponent component = localPlayer.getCharacterEntity().getComponent(CharacterAppearanceComponent.class);
         this.skinColorSupplier = initSliderForColorTypeAndReturnGetterForColor("skin", component.skinColor, SKIN_COLORS);
         this.eyeColorSupplier = initSliderForColorTypeAndReturnGetterForColor("eye", component.eyeColor, EYE_COLORS);
-        this.hairColorSupplier = initSliderForColorTypeAndReturnGetterForColor("hair", component.hairColor,HAIR_COLORS);
-        this.shirtColorSupplier = initSliderForColorTypeAndReturnGetterForColor("shirt", component.shirtColor,SHIRT_COLORS);
+        this.hairColorSupplier = initSliderForColorTypeAndReturnGetterForColor("hair", component.hairColor, HAIR_COLORS);
+        this.shirtColorSupplier = initSliderForColorTypeAndReturnGetterForColor("shirt", component.shirtColor, SHIRT_COLORS);
         this.pantColorSupplier = initSliderForColorTypeAndReturnGetterForColor("pant", component.pantColor, PANT_COLORS);
         this.shoeColorSupplier = initSliderForColorTypeAndReturnGetterForColor("shoe", component.shoeColor, SHOE_COLORS);
     }
@@ -126,10 +126,10 @@ public class CharacterAppearanceScreen extends CoreScreenLayer {
     public void onOkButton(UIWidget button) {
         Color skinColor = skinColorSupplier.get();
         Color eyeColor = eyeColorSupplier.get();
-        Color hairColor = hairColorSupplier.get();;
+        Color hairColor = hairColorSupplier.get();
         Color shirtColor = shirtColorSupplier.get();
         Color pantColor = pantColorSupplier.get();
-        Color shoeColor = shoeColorSupplier.get();;
+        Color shoeColor = shoeColorSupplier.get();
         localPlayer.getCharacterEntity().send(new ChangeCharacterAppearanceRequest(skinColor, eyeColor, hairColor, shirtColor, pantColor, shoeColor));
 
         getManager().popScreen();
@@ -158,7 +158,6 @@ public class CharacterAppearanceScreen extends CoreScreenLayer {
             this.colorsForSelection = colorsForSelection;
             updateImage();
         }
-
 
 
         @Override

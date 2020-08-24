@@ -39,11 +39,12 @@ import org.terasology.logic.console.commandSystem.annotations.Sender;
 import org.terasology.logic.location.LocationComponent;
 import org.terasology.logic.players.LocalPlayer;
 import org.terasology.math.geom.Vector3f;
+import org.terasology.nui.Color;
 import org.terasology.registry.In;
 import org.terasology.rendering.assets.animation.MeshAnimation;
 import org.terasology.rendering.assets.material.Material;
 import org.terasology.rendering.logic.SkeletalMeshComponent;
-import org.terasology.rendering.nui.Color;
+import org.terasology.nui.Color;
 import org.terasology.rendering.nui.NUIManager;
 
 import java.util.HashMap;

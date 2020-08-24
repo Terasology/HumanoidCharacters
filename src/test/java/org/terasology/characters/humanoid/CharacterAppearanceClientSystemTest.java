@@ -16,8 +16,7 @@
 package org.terasology.characters.humanoid;
 
 import org.junit.Test;
-import org.terasology.rendering.nui.Color;
-
+import org.terasology.nui.Color;
 import static org.junit.Assert.assertEquals;
 
 /**
