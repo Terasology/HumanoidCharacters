@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology.characters.humanoid;
 
-import org.terasology.assets.management.AssetManager;
 import org.terasology.engine.modes.loadProcesses.AwaitedLocalCharacterSpawnEvent;
 import org.terasology.entitySystem.entity.EntityBuilder;
 import org.terasology.entitySystem.entity.EntityManager;
@@ -15,6 +14,7 @@ import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
+import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.logic.characters.StandComponent;
 import org.terasology.logic.characters.VisualCharacterComponent;
 import org.terasology.logic.characters.WalkComponent;
