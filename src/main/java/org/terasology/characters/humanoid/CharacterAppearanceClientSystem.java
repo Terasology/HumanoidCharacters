@@ -2,34 +2,34 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology.characters.humanoid;
 
-import org.terasology.engine.modes.loadProcesses.AwaitedLocalCharacterSpawnEvent;
-import org.terasology.entitySystem.entity.EntityBuilder;
-import org.terasology.entitySystem.entity.EntityManager;
-import org.terasology.entitySystem.entity.EntityRef;
-import org.terasology.entitySystem.entity.lifecycleEvents.BeforeDeactivateComponent;
-import org.terasology.entitySystem.entity.lifecycleEvents.OnChangedComponent;
-import org.terasology.entitySystem.event.EventPriority;
-import org.terasology.entitySystem.event.ReceiveEvent;
-import org.terasology.entitySystem.systems.BaseComponentSystem;
-import org.terasology.entitySystem.systems.RegisterMode;
-import org.terasology.entitySystem.systems.RegisterSystem;
-import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
+import org.terasology.engine.core.modes.loadProcesses.AwaitedLocalCharacterSpawnEvent;
+import org.terasology.engine.entitySystem.entity.EntityBuilder;
+import org.terasology.engine.entitySystem.entity.EntityManager;
+import org.terasology.engine.entitySystem.entity.EntityRef;
+import org.terasology.engine.entitySystem.entity.lifecycleEvents.BeforeDeactivateComponent;
+import org.terasology.engine.entitySystem.entity.lifecycleEvents.OnChangedComponent;
+import org.terasology.engine.entitySystem.event.EventPriority;
+import org.terasology.engine.entitySystem.event.ReceiveEvent;
+import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
+import org.terasology.engine.entitySystem.systems.RegisterMode;
+import org.terasology.engine.entitySystem.systems.RegisterSystem;
+import org.terasology.engine.entitySystem.systems.UpdateSubscriberSystem;
+import org.terasology.engine.logic.characters.StandComponent;
+import org.terasology.engine.logic.characters.VisualCharacterComponent;
+import org.terasology.engine.logic.characters.WalkComponent;
+import org.terasology.engine.logic.characters.events.CreateVisualCharacterEvent;
+import org.terasology.engine.logic.console.commandSystem.annotations.Command;
+import org.terasology.engine.logic.console.commandSystem.annotations.Sender;
+import org.terasology.engine.logic.location.LocationComponent;
+import org.terasology.engine.logic.players.LocalPlayer;
+import org.terasology.engine.registry.In;
+import org.terasology.engine.rendering.assets.animation.MeshAnimation;
+import org.terasology.engine.rendering.assets.material.Material;
+import org.terasology.engine.rendering.logic.SkeletalMeshComponent;
+import org.terasology.engine.rendering.nui.NUIManager;
 import org.terasology.gestalt.assets.management.AssetManager;
-import org.terasology.logic.characters.StandComponent;
-import org.terasology.logic.characters.VisualCharacterComponent;
-import org.terasology.logic.characters.WalkComponent;
-import org.terasology.logic.characters.events.CreateVisualCharacterEvent;
-import org.terasology.logic.console.commandSystem.annotations.Command;
-import org.terasology.logic.console.commandSystem.annotations.Sender;
-import org.terasology.logic.location.LocationComponent;
-import org.terasology.logic.players.LocalPlayer;
 import org.terasology.math.geom.Vector3f;
 import org.terasology.nui.Color;
-import org.terasology.registry.In;
-import org.terasology.rendering.assets.animation.MeshAnimation;
-import org.terasology.rendering.assets.material.Material;
-import org.terasology.rendering.logic.SkeletalMeshComponent;
-import org.terasology.rendering.nui.NUIManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,21 +43,19 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
 
     public static final String CONFIG_SCREEN = "CharacterAppearanceScreen";
     private static final float MIN_SPEED_IN_M_PER_S_FOR_WALK_ANIMATION = 1.0f;
+    private final Map<EntityRef, Vector3f> entityToLastLocationMap = new HashMap<>();
     @In
     private AssetManager assetManager;
-
     @In
     private LocalPlayer localPlayer;
-
     @In
     private NUIManager nuiManager;
-
     @In
     private EntityManager entityManager;
 
-    private Map<EntityRef, Vector3f> entityToLastLocationMap = new HashMap<>();
-
-
+    static String colorToHex(Color skinColor) {
+        return skinColor.toHex().substring(0, 6);
+    }
 
     @ReceiveEvent(priority = EventPriority.PRIORITY_NORMAL)
     public void onCreateDefaultVisualCharacter(CreateVisualCharacterEvent event, EntityRef characterEntity,
@@ -87,8 +85,9 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
 
     @ReceiveEvent
     public void onChangeHumanoidCharacter(OnChangedComponent event, EntityRef characterEntity,
-                                               CharacterAppearanceComponent characterAppearanceComponent) {
-        VisualCharacterComponent visualCharacterComponent = characterEntity.getComponent(VisualCharacterComponent.class);
+                                          CharacterAppearanceComponent characterAppearanceComponent) {
+        VisualCharacterComponent visualCharacterComponent =
+                characterEntity.getComponent(VisualCharacterComponent.class);
         if (visualCharacterComponent == null) {
             return;
         }
@@ -116,11 +115,6 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
         visualCharacter.saveComponent(skeletalMeshComponent);
     }
 
-    static String colorToHex(Color skinColor) {
-        return skinColor.toHex().substring(0,6);
-    }
-
-
     @Command(shortDescription = "Shows character appearance configuration screen",
             helpText = "Shows the screen for configuring the visual character appearance",
             runOnServer = false)
@@ -133,7 +127,7 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
         nuiManager.pushScreen(CONFIG_SCREEN);
     }
 
-    @ReceiveEvent(netFilter =  RegisterMode.CLIENT)
+    @ReceiveEvent(netFilter = RegisterMode.CLIENT)
     public void onShowCharacterApperanceConfigurationScreenEvent(AwaitedLocalCharacterSpawnEvent event,
                                                                  EntityRef character,
                                                                  ShowCharacterApperanceDialogComponent component) {
@@ -142,11 +136,12 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
 
     @Override
     public void update(float delta) {
-        for (EntityRef characterEntity: entityManager.getEntitiesWith(CharacterAppearanceComponent.class)) {
+        for (EntityRef characterEntity : entityManager.getEntitiesWith(CharacterAppearanceComponent.class)) {
             updateVisualForCharacterEntity(characterEntity, delta);
 
         }
     }
+
     @ReceiveEvent
     public void onMinionDeactivation(BeforeDeactivateComponent event, EntityRef entity,
                                      CharacterAppearanceComponent component) {
@@ -158,7 +153,8 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
         if (locationComponent == null) {
             return;
         }
-        VisualCharacterComponent visualCharacterComponent = characterEntity.getComponent(VisualCharacterComponent.class);
+        VisualCharacterComponent visualCharacterComponent =
+                characterEntity.getComponent(VisualCharacterComponent.class);
         if (visualCharacterComponent == null) {
             return;
         }
@@ -176,7 +172,7 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
             return;
         }
         SkeletalMeshComponent skeletalMeshComponent = visualCharacter.getComponent(SkeletalMeshComponent.class);
-        if (skeletalMeshComponent == null)  {
+        if (skeletalMeshComponent == null) {
             return;
         }
         Vector3f position = locationComponent.getWorldPosition();

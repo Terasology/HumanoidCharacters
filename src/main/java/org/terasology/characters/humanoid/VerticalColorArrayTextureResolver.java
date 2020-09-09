@@ -1,28 +1,15 @@
-/*
- * Copyright 2018 MovingBlocks
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2020 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
 package org.terasology.characters.humanoid;
 
 import com.google.common.collect.ImmutableSet;
+import org.terasology.engine.rendering.assets.texture.Texture;
+import org.terasology.engine.rendering.assets.texture.TextureData;
+import org.terasology.engine.rendering.assets.texture.TextureUtil;
 import org.terasology.gestalt.assets.AssetDataProducer;
 import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.gestalt.assets.module.annotations.RegisterAssetDataProducer;
 import org.terasology.gestalt.naming.Name;
-import org.terasology.rendering.assets.texture.Texture;
-import org.terasology.rendering.assets.texture.TextureData;
-import org.terasology.rendering.assets.texture.TextureUtil;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -40,7 +27,7 @@ public class VerticalColorArrayTextureResolver implements AssetDataProducer<Text
     private static final Name HUMANOID_CHARACTERS_MODULE = new Name("HumanoidCharacters");
     private static final String PREFIX = "verticalColorArray(";
     private static final String LOWER_CASE_PREFIX = PREFIX.toLowerCase();
-    private static final String LOWER_CASE_SUFFIX= ")";
+    private static final String LOWER_CASE_SUFFIX = ")";
     private static final int RED_START_INDEX = 0;
     private static final int RED_EXCLUSIVE_END_INDEX = 2;
     private static final int GREEN_START_INDEX = 2;
@@ -49,6 +36,19 @@ public class VerticalColorArrayTextureResolver implements AssetDataProducer<Text
     private static final int BLUE_EXCLUSIVE_END_INDEX = 6;
     private static final int COLOR_STRING_LENGTH = 6;
 
+    static Color parseColor(String colorString1) throws IOException {
+        String colorString = colorString1;
+        if (colorString.length() != COLOR_STRING_LENGTH) {
+            throw new IOException("Not a 6 hex digit color string: " + colorString);
+        }
+        String redString = colorString.substring(RED_START_INDEX, RED_EXCLUSIVE_END_INDEX);
+        String greenString = colorString.substring(GREEN_START_INDEX, GREEN_EXCLUSIVE_END_INDEX);
+        String blueString = colorString.substring(BLUE_START_INDEX, BLUE_EXCLUSIVE_END_INDEX);
+        int red = Integer.parseInt(redString, 16);
+        int green = Integer.parseInt(greenString, 16);
+        int blue = Integer.parseInt(blueString, 16);
+        return new Color(red, green, blue);
+    }
 
     @Override
     public Set<ResourceUrn> getAvailableAssetUrns() {
@@ -96,19 +96,5 @@ public class VerticalColorArrayTextureResolver implements AssetDataProducer<Text
         final ByteBuffer byteBuffer = TextureUtil.convertToByteBuffer(resultImage);
         return Optional.of(new TextureData(resultImage.getWidth(), resultImage.getHeight(),
                 new ByteBuffer[]{byteBuffer}, Texture.WrapMode.REPEAT, Texture.FilterMode.NEAREST));
-    }
-
-    static Color parseColor(String colorString1) throws IOException {
-        String colorString = colorString1;
-        if (colorString.length() != COLOR_STRING_LENGTH) {
-            throw new IOException("Not a 6 hex digit color string: " + colorString);
-        }
-        String redString = colorString.substring(RED_START_INDEX, RED_EXCLUSIVE_END_INDEX);
-        String greenString = colorString.substring(GREEN_START_INDEX, GREEN_EXCLUSIVE_END_INDEX);
-        String blueString = colorString.substring(BLUE_START_INDEX, BLUE_EXCLUSIVE_END_INDEX);
-        int red = Integer.parseInt(redString, 16);
-        int green = Integer.parseInt(greenString, 16);
-        int blue = Integer.parseInt(blueString, 16);
-        return new Color(red, green, blue);
     }
 }

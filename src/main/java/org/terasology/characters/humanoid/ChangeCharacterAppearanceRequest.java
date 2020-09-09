@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology.characters.humanoid;
 
-import org.terasology.network.NetworkEvent;
-import org.terasology.network.ServerEvent;
+import org.terasology.engine.network.NetworkEvent;
+import org.terasology.engine.network.ServerEvent;
 import org.terasology.nui.Color;
 
 /**
@@ -21,7 +21,8 @@ public class ChangeCharacterAppearanceRequest extends NetworkEvent {
     protected ChangeCharacterAppearanceRequest() {
     }
 
-    public ChangeCharacterAppearanceRequest(Color skinColor, Color eyeColor, Color hairColor, Color shirtColor, Color pantColor, Color shoeColor) {
+    public ChangeCharacterAppearanceRequest(Color skinColor, Color eyeColor, Color hairColor, Color shirtColor,
+                                            Color pantColor, Color shoeColor) {
         this.skinColor = skinColor;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
