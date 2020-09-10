@@ -4,7 +4,7 @@
     "type": "RelativeLayout",
     "contents": [
       {
-        "type": "engine:UIBox",
+        "type": "nui:UIBox",
         "layoutInfo": {
           "width": 500,
           "height": 320,
@@ -15,7 +15,7 @@
           "type": "RelativeLayout",
           "contents": [
             {
-              "type": "engine:UILabel",
+              "type": "nui:UILabel",
               "id": "titleLabel",
               "layoutInfo": {
                 "position-top": {},
@@ -37,18 +37,18 @@
               },
               "contents": [
                 {
-                  "type": "engine:UILabel",
+                  "type": "nui:UILabel",
                   "id": "skinColorLabel",
                   "layoutInfo": {},
                   "text": "Skin Color"
                 },
                 {
-                  "type": "engine:UISlider",
+                  "type": "nui:UISlider",
                   "id": "skinColorSlider",
                   "layoutInfo": {}
                 },
                 {
-                  "type": "engine:UIImage",
+                  "type": "nui:UIImage",
                   "id": "skinColorImage",
                   "layoutInfo": {
                     "relativeWidth": 0.1
@@ -70,18 +70,18 @@
               },
               "contents": [
                 {
-                  "type": "engine:UILabel",
+                  "type": "nui:UILabel",
                   "id": "eyeColorLabel",
                   "layoutInfo": {},
                   "text": "Eye Color"
                 },
                 {
-                  "type": "engine:UISlider",
+                  "type": "nui:UISlider",
                   "id": "eyeColorSlider",
                   "layoutInfo": {}
                 },
                 {
-                  "type": "engine:UIImage",
+                  "type": "nui:UIImage",
                   "id": "eyeColorImage",
                   "layoutInfo": {
                     "relativeWidth": 0.1
@@ -103,18 +103,18 @@
               },
               "contents": [
                 {
-                  "type": "engine:UILabel",
+                  "type": "nui:UILabel",
                   "id": "hairColorLabel",
                   "layoutInfo": {},
                   "text": "Hair Color"
                 },
                 {
-                  "type": "engine:UISlider",
+                  "type": "nui:UISlider",
                   "id": "hairColorSlider",
                   "layoutInfo": {}
                 },
                 {
-                  "type": "engine:UIImage",
+                  "type": "nui:UIImage",
                   "id": "hairColorImage",
                   "layoutInfo": {
                     "relativeWidth": 0.1
@@ -136,18 +136,18 @@
               },
               "contents": [
                 {
-                  "type": "engine:UILabel",
+                  "type": "nui:UILabel",
                   "id": "shirtColorLabel",
                   "layoutInfo": {},
                   "text": "Shirt Color"
                 },
                 {
-                  "type": "engine:UISlider",
+                  "type": "nui:UISlider",
                   "id": "shirtColorSlider",
                   "layoutInfo": {}
                 },
                 {
-                  "type": "engine:UIImage",
+                  "type": "nui:UIImage",
                   "id": "shirtColorImage",
                   "layoutInfo": {
                     "relativeWidth": 0.1
@@ -169,18 +169,18 @@
               },
               "contents": [
                 {
-                  "type": "engine:UILabel",
+                  "type": "nui:UILabel",
                   "id": "pantColorLabel",
                   "layoutInfo": {},
                   "text": "Pant Color"
                 },
                 {
-                  "type": "engine:UISlider",
+                  "type": "nui:UISlider",
                   "id": "pantColorSlider",
                   "layoutInfo": {}
                 },
                 {
-                  "type": "engine:UIImage",
+                  "type": "nui:UIImage",
                   "id": "pantColorImage",
                   "layoutInfo": {
                     "relativeWidth": 0.1
@@ -202,18 +202,18 @@
               },
               "contents": [
                 {
-                  "type": "engine:UILabel",
+                  "type": "nui:UILabel",
                   "id": "shoeColorLabel",
                   "layoutInfo": {},
                   "text": "Shoe Color"
                 },
                 {
-                  "type": "engine:UISlider",
+                  "type": "nui:UISlider",
                   "id": "shoeColorSlider",
                   "layoutInfo": {}
                 },
                 {
-                  "type": "engine:UIImage",
+                  "type": "nui:UIImage",
                   "id": "shoeColorImage",
                   "layoutInfo": {
                     "relativeWidth": 0.1
@@ -223,7 +223,7 @@
               ]
             },
             {
-              "type": "engine:RowLayout",
+              "type": "nui:rowLayout",
               "id": "buttonLayout",
               "layoutInfo": {
                 "height": 50,
@@ -231,13 +231,13 @@
               },
               "contents": [
                 {
-                  "type": "engine:UIButton",
+                  "type": "nui:UIButton",
                   "id": "okButton",
                   "layoutInfo": {},
                   "text": "Ok"
                 },
                 {
-                  "type": "engine:UIButton",
+                  "type": "nui:UIButton",
                   "id": "cancelButton",
                   "layoutInfo": {},
                   "text": "Cancel"
