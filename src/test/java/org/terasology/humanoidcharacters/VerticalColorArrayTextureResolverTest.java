@@ -1,6 +1,6 @@
 // Copyright 2020 The Terasology Foundation
 // SPDX-License-Identifier: Apache-2.0
-package org.terasology.characters.humanoid;
+package org.terasology.humanoidcharacters;
 
 import org.junit.Test;
 import org.terasology.engine.rendering.assets.texture.TextureData;
