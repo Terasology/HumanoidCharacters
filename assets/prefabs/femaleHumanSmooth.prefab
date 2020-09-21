@@ -1,0 +1,20 @@
+{
+  "skeletalmesh": {
+    "mesh": "femaleHumanSmooth",
+    "heightOffset": -0.8,
+    "material": "HumanoidCharacters:femaleHumanSkin",
+    "animation": "femalehumansmooth#idle",
+    "animationPool": ["femalehumansmooth#idle"],
+    "loop": true,
+    "scale": [0.005, 0.005, 0.005]
+  },
+  "persisted": false,
+  "location": {},
+  "Stand" :{
+    "animationPool": ["femalehumansmooth#idle"]
+  },
+  "Walk" :{
+    // We don't have a component for run animations yet, since player usually runs, play run animation
+    "animationPool": ["femalehumansmooth#Running"]
+  }
+}
