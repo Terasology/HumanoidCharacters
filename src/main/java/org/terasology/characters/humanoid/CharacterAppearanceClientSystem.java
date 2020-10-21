@@ -58,12 +58,11 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
     private Map<EntityRef, Vector3f> entityToLastLocationMap = new HashMap<>();
 
 
-
     @ReceiveEvent(priority = EventPriority.PRIORITY_NORMAL)
     public void onCreateDefaultVisualCharacter(CreateVisualCharacterEvent event, EntityRef characterEntity,
                                                CharacterAppearanceComponent characterAppearanceComponent) {
         EntityBuilder entityBuilder = event.getVisualCharacterBuilder();
-        entityBuilder.addPrefab("HumanoidCharacters:femaleHuman");
+        entityBuilder.addPrefab("HumanoidCharacters:femaleHumanSmooth");
         SkeletalMeshComponent skeletalMeshComponent = entityBuilder.getComponent(SkeletalMeshComponent.class);
         StringBuilder urnBuilder = new StringBuilder();
         urnBuilder.append("HumanoidCharacters:verticalColorArray(");
