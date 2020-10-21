@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology.characters.humanoid;
 
+import org.joml.Vector3f;
 import org.terasology.assets.management.AssetManager;
 import org.terasology.engine.modes.loadProcesses.AwaitedLocalCharacterSpawnEvent;
 import org.terasology.entitySystem.entity.EntityBuilder;
@@ -23,7 +24,6 @@ import org.terasology.logic.console.commandSystem.annotations.Command;
 import org.terasology.logic.console.commandSystem.annotations.Sender;
 import org.terasology.logic.location.LocationComponent;
 import org.terasology.logic.players.LocalPlayer;
-import org.terasology.math.geom.Vector3f;
 import org.terasology.nui.Color;
 import org.terasology.registry.In;
 import org.terasology.rendering.assets.animation.MeshAnimation;
@@ -178,7 +178,7 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
         if (skeletalMeshComponent == null)  {
             return;
         }
-        Vector3f position = locationComponent.getWorldPosition();
+        Vector3f position = locationComponent.getWorldPosition(new Vector3f());
         Vector3f lastPosition = entityToLastLocationMap.get(characterEntity);
         entityToLastLocationMap.put(characterEntity, position);
 
