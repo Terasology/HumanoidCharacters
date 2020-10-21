@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology.characters.humanoid;
 
+import org.joml.Vector3f;
 import org.terasology.assets.management.AssetManager;
 import org.terasology.engine.modes.loadProcesses.AwaitedLocalCharacterSpawnEvent;
 import org.terasology.entitySystem.entity.EntityBuilder;
@@ -23,7 +24,6 @@ import org.terasology.logic.console.commandSystem.annotations.Command;
 import org.terasology.logic.console.commandSystem.annotations.Sender;
 import org.terasology.logic.location.LocationComponent;
 import org.terasology.logic.players.LocalPlayer;
-import org.terasology.math.geom.Vector3f;
 import org.terasology.nui.Color;
 import org.terasology.registry.In;
 import org.terasology.rendering.assets.animation.MeshAnimation;
@@ -58,12 +58,11 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
     private Map<EntityRef, Vector3f> entityToLastLocationMap = new HashMap<>();
 
 
-
     @ReceiveEvent(priority = EventPriority.PRIORITY_NORMAL)
     public void onCreateDefaultVisualCharacter(CreateVisualCharacterEvent event, EntityRef characterEntity,
                                                CharacterAppearanceComponent characterAppearanceComponent) {
         EntityBuilder entityBuilder = event.getVisualCharacterBuilder();
-        entityBuilder.addPrefab("HumanoidCharacters:femaleHuman");
+        entityBuilder.addPrefab("HumanoidCharacters:femaleHumanSmooth");
         SkeletalMeshComponent skeletalMeshComponent = entityBuilder.getComponent(SkeletalMeshComponent.class);
         StringBuilder urnBuilder = new StringBuilder();
         urnBuilder.append("HumanoidCharacters:verticalColorArray(");
@@ -87,8 +86,9 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
 
     @ReceiveEvent
     public void onChangeHumanoidCharacter(OnChangedComponent event, EntityRef characterEntity,
-                                               CharacterAppearanceComponent characterAppearanceComponent) {
-        VisualCharacterComponent visualCharacterComponent = characterEntity.getComponent(VisualCharacterComponent.class);
+                                          CharacterAppearanceComponent characterAppearanceComponent) {
+        VisualCharacterComponent visualCharacterComponent =
+                characterEntity.getComponent(VisualCharacterComponent.class);
         if (visualCharacterComponent == null) {
             return;
         }
@@ -117,7 +117,7 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
     }
 
     static String colorToHex(Color skinColor) {
-        return skinColor.toHex().substring(0,6);
+        return skinColor.toHex().substring(0, 6);
     }
 
 
@@ -133,7 +133,7 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
         nuiManager.pushScreen(CONFIG_SCREEN);
     }
 
-    @ReceiveEvent(netFilter =  RegisterMode.CLIENT)
+    @ReceiveEvent(netFilter = RegisterMode.CLIENT)
     public void onShowCharacterApperanceConfigurationScreenEvent(AwaitedLocalCharacterSpawnEvent event,
                                                                  EntityRef character,
                                                                  ShowCharacterApperanceDialogComponent component) {
@@ -142,11 +142,12 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
 
     @Override
     public void update(float delta) {
-        for (EntityRef characterEntity: entityManager.getEntitiesWith(CharacterAppearanceComponent.class)) {
+        for (EntityRef characterEntity : entityManager.getEntitiesWith(CharacterAppearanceComponent.class)) {
             updateVisualForCharacterEntity(characterEntity, delta);
 
         }
     }
+
     @ReceiveEvent
     public void onMinionDeactivation(BeforeDeactivateComponent event, EntityRef entity,
                                      CharacterAppearanceComponent component) {
@@ -158,7 +159,8 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
         if (locationComponent == null) {
             return;
         }
-        VisualCharacterComponent visualCharacterComponent = characterEntity.getComponent(VisualCharacterComponent.class);
+        VisualCharacterComponent visualCharacterComponent =
+                characterEntity.getComponent(VisualCharacterComponent.class);
         if (visualCharacterComponent == null) {
             return;
         }
@@ -176,10 +178,10 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
             return;
         }
         SkeletalMeshComponent skeletalMeshComponent = visualCharacter.getComponent(SkeletalMeshComponent.class);
-        if (skeletalMeshComponent == null)  {
+        if (skeletalMeshComponent == null) {
             return;
         }
-        Vector3f position = locationComponent.getWorldPosition();
+        Vector3f position = locationComponent.getWorldPosition(new Vector3f());
         Vector3f lastPosition = entityToLastLocationMap.get(characterEntity);
         entityToLastLocationMap.put(characterEntity, position);
 
