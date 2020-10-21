@@ -86,8 +86,9 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
 
     @ReceiveEvent
     public void onChangeHumanoidCharacter(OnChangedComponent event, EntityRef characterEntity,
-                                               CharacterAppearanceComponent characterAppearanceComponent) {
-        VisualCharacterComponent visualCharacterComponent = characterEntity.getComponent(VisualCharacterComponent.class);
+                                          CharacterAppearanceComponent characterAppearanceComponent) {
+        VisualCharacterComponent visualCharacterComponent =
+                characterEntity.getComponent(VisualCharacterComponent.class);
         if (visualCharacterComponent == null) {
             return;
         }
@@ -116,7 +117,7 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
     }
 
     static String colorToHex(Color skinColor) {
-        return skinColor.toHex().substring(0,6);
+        return skinColor.toHex().substring(0, 6);
     }
 
 
@@ -132,7 +133,7 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
         nuiManager.pushScreen(CONFIG_SCREEN);
     }
 
-    @ReceiveEvent(netFilter =  RegisterMode.CLIENT)
+    @ReceiveEvent(netFilter = RegisterMode.CLIENT)
     public void onShowCharacterApperanceConfigurationScreenEvent(AwaitedLocalCharacterSpawnEvent event,
                                                                  EntityRef character,
                                                                  ShowCharacterApperanceDialogComponent component) {
@@ -141,11 +142,12 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
 
     @Override
     public void update(float delta) {
-        for (EntityRef characterEntity: entityManager.getEntitiesWith(CharacterAppearanceComponent.class)) {
+        for (EntityRef characterEntity : entityManager.getEntitiesWith(CharacterAppearanceComponent.class)) {
             updateVisualForCharacterEntity(characterEntity, delta);
 
         }
     }
+
     @ReceiveEvent
     public void onMinionDeactivation(BeforeDeactivateComponent event, EntityRef entity,
                                      CharacterAppearanceComponent component) {
@@ -157,7 +159,8 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
         if (locationComponent == null) {
             return;
         }
-        VisualCharacterComponent visualCharacterComponent = characterEntity.getComponent(VisualCharacterComponent.class);
+        VisualCharacterComponent visualCharacterComponent =
+                characterEntity.getComponent(VisualCharacterComponent.class);
         if (visualCharacterComponent == null) {
             return;
         }
@@ -175,7 +178,7 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
             return;
         }
         SkeletalMeshComponent skeletalMeshComponent = visualCharacter.getComponent(SkeletalMeshComponent.class);
-        if (skeletalMeshComponent == null)  {
+        if (skeletalMeshComponent == null) {
             return;
         }
         Vector3f position = locationComponent.getWorldPosition(new Vector3f());
