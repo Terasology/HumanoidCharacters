@@ -1,12 +1,12 @@
 {
     "skeletalmesh": {
         "mesh": "maleHuman",
-        "heightOffset": -0.8,
+        "heightOffset": -0.9,
         "material": "HumanoidCharacters:maleHumanSkin",
         "animation": "maleHuman#idle",
         "animationPool": ["maleHuman#idle"],
         "loop": true,
-        "scale": [0.5, 0.5, 0.5]
+        "scale": [0.36, 0.36, 0.36]
     },
     "persisted": false,
     "location": {},
