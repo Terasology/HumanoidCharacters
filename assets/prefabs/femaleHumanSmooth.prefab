@@ -1,12 +1,12 @@
 {
   "skeletalmesh": {
     "mesh": "femaleHumanSmooth",
-    "heightOffset": -0.8,
+    "heightOffset": -0.9,
     "material": "HumanoidCharacters:femaleHumanSkin",
     "animation": "femalehumansmooth#idle",
     "animationPool": ["femalehumansmooth#idle"],
     "loop": true,
-    "scale": [0.005, 0.005, 0.005]
+    "scale":  [0.0036, 0.0036, 0.0036]
   },
   "persisted": false,
   "location": {},
