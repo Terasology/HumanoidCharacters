@@ -10,5 +10,5 @@
         "pantColor": [97, 135, 211, 255],
         "shoeColor": [240, 71, 47, 255]
     },
-    "ShowCharacterApperanceDialog":{}
+    "ShowCharacterAppearanceDialog":{}
 }

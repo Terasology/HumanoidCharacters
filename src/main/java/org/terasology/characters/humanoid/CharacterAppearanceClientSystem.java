@@ -136,7 +136,7 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
     @ReceiveEvent(netFilter = RegisterMode.CLIENT)
     public void onShowCharacterApperanceConfigurationScreenEvent(AwaitedLocalCharacterSpawnEvent event,
                                                                  EntityRef character,
-                                                                 ShowCharacterApperanceDialogComponent component) {
+                                                                 ShowCharacterAppearanceDialogComponent component) {
         showConfigurationScreen();
     }
 

@@ -20,8 +20,8 @@ import org.terasology.network.FieldReplicateType;
 import org.terasology.network.Replicate;
 
 /**
- * When this component is attached to a character a apperance selection dialg will be shown when the player joins.
+ * When this component is attached to a character a appearance selection dialog will be shown when the player joins.
  */
 @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
-public class ShowCharacterApperanceDialogComponent implements Component {
+public class ShowCharacterAppearanceDialogComponent implements Component {
 }

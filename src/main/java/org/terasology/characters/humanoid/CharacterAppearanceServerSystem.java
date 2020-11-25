@@ -49,7 +49,7 @@ public class CharacterAppearanceServerSystem extends BaseComponentSystem {
             characterAppearanceComponent.shoeColor = event.getShoeColor();
         }
         characterEntity.saveComponent(characterAppearanceComponent);
-        characterEntity.removeComponent(ShowCharacterApperanceDialogComponent.class);
+        characterEntity.removeComponent(ShowCharacterAppearanceDialogComponent.class);
     }
 
 
