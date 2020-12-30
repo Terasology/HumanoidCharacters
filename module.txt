@@ -1,10 +1,10 @@
 {
-    "id": "HumanoidCharacters",
-    "version": "1.0.0",
-    "author": "The Terasology Foundation",
-    "displayName": "HumanoidCharacters",
-    "description": "This augmentation module adds a humanoid model as the player appearance",
-    "dependencies": [],
-    "serverSideOnly": false,
-    "isAugmentation": true
+  "id": "HumanoidCharacters",
+  "version": "1.1.0-SNAPSHOT",
+  "author": "The Terasology Foundation",
+  "displayName": "HumanoidCharacters",
+  "description": "This augmentation module adds a humanoid model as the player appearance",
+  "dependencies": [],
+  "serverSideOnly": false,
+  "isAugmentation": true
 }
