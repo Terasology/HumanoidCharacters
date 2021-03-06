@@ -15,7 +15,7 @@
  */
 package org.terasology.characters.humanoid;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.terasology.assets.ResourceUrn;
 import org.terasology.rendering.assets.texture.TextureData;
 
