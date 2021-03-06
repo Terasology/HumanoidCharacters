@@ -15,14 +15,14 @@
  */
 package org.terasology.characters.humanoid;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.terasology.assets.ResourceUrn;
 import org.terasology.rendering.assets.texture.TextureData;
 
 import java.awt.Color;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test for {@link VerticalColorArrayTextureResolver}
