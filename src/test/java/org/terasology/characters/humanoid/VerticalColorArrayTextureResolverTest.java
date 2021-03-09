@@ -17,7 +17,7 @@ package org.terasology.characters.humanoid;
 
 import org.junit.jupiter.api.Test;
 import org.terasology.assets.ResourceUrn;
-import org.terasology.rendering.assets.texture.TextureData;
+import org.terasology.engine.rendering.assets.texture.TextureData;
 
 import java.awt.Color;
 import java.util.Optional;

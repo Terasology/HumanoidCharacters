@@ -15,9 +15,9 @@
  */
 package org.terasology.characters.humanoid;
 
-import org.terasology.entitySystem.Component;
-import org.terasology.network.FieldReplicateType;
-import org.terasology.network.Replicate;
+import org.terasology.engine.entitySystem.Component;
+import org.terasology.engine.network.FieldReplicateType;
+import org.terasology.engine.network.Replicate;
 
 /**
  * When this component is attached to a character a appearance selection dialog will be shown when the player joins.

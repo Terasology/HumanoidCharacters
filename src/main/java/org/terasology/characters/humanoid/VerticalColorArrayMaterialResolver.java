@@ -20,10 +20,10 @@ import org.terasology.assets.AssetDataProducer;
 import org.terasology.assets.ResourceUrn;
 import org.terasology.assets.management.AssetManager;
 import org.terasology.assets.module.annotations.RegisterAssetDataProducer;
+import org.terasology.engine.rendering.assets.material.MaterialData;
+import org.terasology.engine.rendering.assets.shader.Shader;
+import org.terasology.engine.rendering.assets.texture.Texture;
 import org.terasology.naming.Name;
-import org.terasology.rendering.assets.material.MaterialData;
-import org.terasology.rendering.assets.shader.Shader;
-import org.terasology.rendering.assets.texture.Texture;
 
 import java.io.IOException;
 import java.util.Collections;
