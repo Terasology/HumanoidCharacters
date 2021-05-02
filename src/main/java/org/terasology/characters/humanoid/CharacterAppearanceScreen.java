@@ -7,7 +7,7 @@ import com.google.common.base.Functions;
 import com.google.common.math.DoubleMath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.entitySystem.entity.EntityManager;
 import org.terasology.engine.logic.players.LocalPlayer;
 import org.terasology.engine.registry.In;

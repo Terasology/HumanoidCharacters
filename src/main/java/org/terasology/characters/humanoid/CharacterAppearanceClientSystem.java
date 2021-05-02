@@ -3,7 +3,6 @@
 package org.terasology.characters.humanoid;
 
 import org.joml.Vector3f;
-import org.terasology.assets.management.AssetManager;
 import org.terasology.engine.core.modes.loadProcesses.AwaitedLocalCharacterSpawnEvent;
 import org.terasology.engine.entitySystem.entity.EntityBuilder;
 import org.terasology.engine.entitySystem.entity.EntityManager;
@@ -29,6 +28,7 @@ import org.terasology.engine.rendering.assets.animation.MeshAnimation;
 import org.terasology.engine.rendering.assets.material.Material;
 import org.terasology.engine.rendering.logic.SkeletalMeshComponent;
 import org.terasology.engine.rendering.nui.NUIManager;
+import org.terasology.gestalt.assets.management.AssetManager;
 import org.terasology.nui.Color;
 
 import java.util.HashMap;
