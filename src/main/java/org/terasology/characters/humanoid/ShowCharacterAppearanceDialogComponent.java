@@ -4,14 +4,11 @@ package org.terasology.characters.humanoid;
 
 import org.terasology.engine.network.FieldReplicateType;
 import org.terasology.engine.network.Replicate;
-import org.terasology.gestalt.entitysystem.component.Component;
+import org.terasology.gestalt.entitysystem.component.EmptyComponent;
 
 /**
  * When this component is attached to a character a appearance selection dialog will be shown when the player joins.
  */
 @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
-public class ShowCharacterAppearanceDialogComponent implements Component<ShowCharacterAppearanceDialogComponent> {
-    @Override
-    public void copy(ShowCharacterAppearanceDialogComponent other) {
-    }
+public class ShowCharacterAppearanceDialogComponent extends EmptyComponent<ShowCharacterAppearanceDialogComponent> {
 }
