@@ -11,7 +11,7 @@ import org.terasology.nui.Color;
  * Humanoid character properties
  */
 @Replicate(FieldReplicateType.OWNER_TO_SERVER_TO_CLIENT)
-public class CharacterAppearanceComponent implements Component{
+public class CharacterAppearanceComponent implements Component<CharacterAppearanceComponent> {
 
     @Replicate(FieldReplicateType.OWNER_TO_SERVER_TO_CLIENT)
     public Color skinColor;
@@ -25,4 +25,14 @@ public class CharacterAppearanceComponent implements Component{
     public Color pantColor;
     @Replicate(FieldReplicateType.OWNER_TO_SERVER_TO_CLIENT)
     public Color shoeColor;
+
+    @Override
+    public void copy(CharacterAppearanceComponent other) {
+        skinColor = new Color(skinColor);
+        eyeColor = new Color(eyeColor);
+        hairColor = new Color(hairColor);
+        shirtColor = new Color(shirtColor);
+        pantColor = new Color(pantColor);
+        shoeColor = new Color(shoeColor);
+    }
 }

@@ -11,4 +11,7 @@ import org.terasology.gestalt.entitysystem.component.Component;
  */
 @Replicate(FieldReplicateType.SERVER_TO_CLIENT)
 public class ShowCharacterAppearanceDialogComponent implements Component<ShowCharacterAppearanceDialogComponent> {
+    @Override
+    public void copy(ShowCharacterAppearanceDialogComponent other) {
+    }
 }
