@@ -27,7 +27,7 @@ public class CharacterAppearanceComponent implements Component<CharacterAppearan
     public Color shoeColor;
 
     @Override
-    public void copy(CharacterAppearanceComponent other) {
+    public void copyFrom(CharacterAppearanceComponent other) {
         skinColor = new Color(skinColor);
         eyeColor = new Color(eyeColor);
         hairColor = new Color(hairColor);
