@@ -12,6 +12,7 @@ import org.terasology.engine.entitySystem.entity.lifecycleEvents.OnChangedCompon
 import org.terasology.engine.entitySystem.event.EventPriority;
 import org.terasology.engine.entitySystem.event.ReceiveEvent;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
+import org.terasology.engine.entitySystem.systems.NetFilterEvent;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
 import org.terasology.engine.entitySystem.systems.UpdateSubscriberSystem;
@@ -133,7 +134,8 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
         nuiManager.pushScreen(CONFIG_SCREEN);
     }
 
-    @ReceiveEvent(netFilter = RegisterMode.CLIENT)
+    @NetFilterEvent(netFilter = RegisterMode.CLIENT)
+    @ReceiveEvent
     public void onShowCharacterApperanceConfigurationScreenEvent(AwaitedLocalCharacterSpawnEvent event,
                                                                  EntityRef character,
                                                                  ShowCharacterAppearanceDialogComponent component) {
