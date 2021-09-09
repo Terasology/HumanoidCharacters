@@ -11,7 +11,6 @@ import org.terasology.engine.entitySystem.entity.lifecycleEvents.BeforeDeactivat
 import org.terasology.engine.entitySystem.entity.lifecycleEvents.OnChangedComponent;
 import org.terasology.engine.entitySystem.event.EventPriority;
 import org.terasology.engine.entitySystem.event.Priority;
-import org.terasology.engine.entitySystem.event.ReceiveEvent;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.NetFilterEvent;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
@@ -31,6 +30,7 @@ import org.terasology.engine.rendering.assets.material.Material;
 import org.terasology.engine.rendering.logic.SkeletalMeshComponent;
 import org.terasology.engine.rendering.nui.NUIManager;
 import org.terasology.gestalt.assets.management.AssetManager;
+import org.terasology.gestalt.entitysystem.event.ReceiveEvent;
 import org.terasology.nui.Color;
 
 import java.util.HashMap;
