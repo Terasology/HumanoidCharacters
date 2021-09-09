@@ -10,6 +10,7 @@ import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.lifecycleEvents.BeforeDeactivateComponent;
 import org.terasology.engine.entitySystem.entity.lifecycleEvents.OnChangedComponent;
 import org.terasology.engine.entitySystem.event.EventPriority;
+import org.terasology.engine.entitySystem.event.Priority;
 import org.terasology.engine.entitySystem.event.ReceiveEvent;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
 import org.terasology.engine.entitySystem.systems.NetFilterEvent;
@@ -59,7 +60,8 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
     private Map<EntityRef, Vector3f> entityToLastLocationMap = new HashMap<>();
 
 
-    @ReceiveEvent(priority = EventPriority.PRIORITY_NORMAL)
+    @Priority(EventPriority.PRIORITY_NORMAL)
+    @ReceiveEvent
     public void onCreateDefaultVisualCharacter(CreateVisualCharacterEvent event, EntityRef characterEntity,
                                                CharacterAppearanceComponent characterAppearanceComponent) {
         EntityBuilder entityBuilder = event.getVisualCharacterBuilder();
