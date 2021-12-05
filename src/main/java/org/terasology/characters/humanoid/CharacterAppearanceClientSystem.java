@@ -10,8 +10,9 @@ import org.terasology.engine.entitySystem.entity.EntityRef;
 import org.terasology.engine.entitySystem.entity.lifecycleEvents.BeforeDeactivateComponent;
 import org.terasology.engine.entitySystem.entity.lifecycleEvents.OnChangedComponent;
 import org.terasology.engine.entitySystem.event.EventPriority;
-import org.terasology.engine.entitySystem.event.ReceiveEvent;
+import org.terasology.engine.entitySystem.event.Priority;
 import org.terasology.engine.entitySystem.systems.BaseComponentSystem;
+import org.terasology.engine.entitySystem.systems.NetFilterEvent;
 import org.terasology.engine.entitySystem.systems.RegisterMode;
 import org.terasology.engine.entitySystem.systems.RegisterSystem;
 import org.terasology.engine.entitySystem.systems.UpdateSubscriberSystem;
@@ -29,6 +30,7 @@ import org.terasology.engine.rendering.assets.material.Material;
 import org.terasology.engine.rendering.logic.SkeletalMeshComponent;
 import org.terasology.engine.rendering.nui.NUIManager;
 import org.terasology.gestalt.assets.management.AssetManager;
+import org.terasology.gestalt.entitysystem.event.ReceiveEvent;
 import org.terasology.nui.Color;
 
 import java.util.HashMap;
@@ -58,7 +60,8 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
     private Map<EntityRef, Vector3f> entityToLastLocationMap = new HashMap<>();
 
 
-    @ReceiveEvent(priority = EventPriority.PRIORITY_NORMAL)
+    @Priority(EventPriority.PRIORITY_NORMAL)
+    @ReceiveEvent
     public void onCreateDefaultVisualCharacter(CreateVisualCharacterEvent event, EntityRef characterEntity,
                                                CharacterAppearanceComponent characterAppearanceComponent) {
         EntityBuilder entityBuilder = event.getVisualCharacterBuilder();
@@ -133,7 +136,8 @@ public class CharacterAppearanceClientSystem extends BaseComponentSystem impleme
         nuiManager.pushScreen(CONFIG_SCREEN);
     }
 
-    @ReceiveEvent(netFilter = RegisterMode.CLIENT)
+    @NetFilterEvent(netFilter = RegisterMode.CLIENT)
+    @ReceiveEvent
     public void onShowCharacterApperanceConfigurationScreenEvent(AwaitedLocalCharacterSpawnEvent event,
                                                                  EntityRef character,
                                                                  ShowCharacterAppearanceDialogComponent component) {
